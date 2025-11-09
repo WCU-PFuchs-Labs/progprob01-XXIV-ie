@@ -1,46 +1,31 @@
-/*
-Given a sorted linked list, delete all nodes that have duplicate
-numbers, leaving only distinct numbers from the original list.In this 
-program, you need to 
-(1) read 5 numbers and set them in a linkedlist in order
-(2) delete duplicate
+import java.util.Scanner;
 
-Example 1:
-input: 1,2,3,3,5
-output: head-->1-->2-->3-->5-->null
-
-Example 2:
-input: 1,1,1,2,3
-output: head-->1-->2-->3-->null
-
-Please complete the following program to fullfil the function.
-*/
 public class homework20_1
 {
    public static void main(String[] args)
    {
-      
-Scanner sc = new Scanner (System.in);
-LinkedList llist = new LinkedList();
-      for (int i=0; i<5; i++){
+      Scanner sc = new Scanner(System.in);
+      LinkedList llist = new LinkedList();
+
+      for (int i = 0; i < 5; i++) {
          int x = sc.nextInt();
          llist.insertSorted(x);
-      
-   }
-      deleteDuplicates(list);
+      }
+
+      deleteDuplicates(llist);
+
       System.out.println(llist);
    }
+
    public static void deleteDuplicates(LinkedList llist)
    {
       ListNode cur = llist.head;
-      while (cur != null && cur.next != null){
-         if (cur.value == cur.next.value){
+      while (cur != null && cur.next != null) {
+         if (cur.value == cur.next.value) {
             cur.next = cur.next.next;
-
-   }else{
-            cur=cur.ext;
-
-}
+         } else {
+            cur = cur.next;
+         }
       }
    }
 }
@@ -49,12 +34,28 @@ class ListNode
 {
    int value;
    ListNode next;
-   ListNode(int v){value = v;}
+   ListNode(int v){ value = v; }
 }
 
 class LinkedList
 {
    ListNode head;
+
+   public void insertSorted(int v) {
+      ListNode node = new ListNode(v);
+      if (head == null || v <= head.value) {
+         node.next = head;
+         head = node;
+         return;
+      }
+      ListNode prev = head;
+      while (prev.next != null && prev.next.value <= v) {
+         prev = prev.next;
+      }
+      node.next = prev.next;
+      prev.next = node;
+   }
+
    public String toString()
    {
       String nodeData = "";
