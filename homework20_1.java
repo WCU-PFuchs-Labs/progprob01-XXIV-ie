@@ -20,7 +20,7 @@ public class homework20_1
    public static void main(String[] args)
    {
       
-Scanner sc = new Scaner (System.in);
+Scanner sc = new Scanner (System.in);
 LinkedList llist = new LinkedList();
       for (int i=0; i<5; i++){
          int x = sc.nextInt();
